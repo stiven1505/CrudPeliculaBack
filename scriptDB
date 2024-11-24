@@ -1,0 +1,19 @@
+-- Crear la base de datos (opcional, si no está creada aún)
+CREATE DATABASE Peliculas;
+
+-- Usar la base de datos
+\c Peliculas;
+
+-- Crear la tabla de películas
+CREATE TABLE Peliculas (
+    Id INT IDENTITY(1,1) PRIMARY KEY,                 -- Identificador único
+    Nombre VARCHAR(255) NOT NULL,          -- Nombre de la película
+    Descripcion TEXT,                      -- Descripción
+    Cubierta VARCHAR(255),                 -- URL de la imagen de la cubierta
+    Puntaje NUMERIC(2, 1) CHECK (puntaje BETWEEN 0 AND 10),  -- Puntaje (0-10)
+    Estado VARCHAR(20) NOT NULL CHECK (estado IN ('Publicada', 'Edicion')),  -- Estado
+    Estado_alquiler VARCHAR(20) NOT NULL CHECK (estado_alquiler IN ('Disponible', 'Alquilada')), -- Estado de alquiler
+    Fecha_creacion DATETIME DEFAULT GETDATE(), -- Fecha de creación
+    Fecha_modificacion DATETIME DEFAULT GETDATE() -- Fecha de modificación
+);
+
